@@ -1,5 +1,7 @@
 function lookForUpdades() {}
 
-setInterval(lookForUpdades, 60 * 30 * 1000)
+const halfAnHour = 60 * 30 * 1000;
 
-function calculateDiscount(price, discount) {}
+setInterval(lookForUpdades, halfAnHour)
+
+function calculateDiscount(price, discountMinut) {}
