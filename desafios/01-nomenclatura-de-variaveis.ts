@@ -1,55 +1,31 @@
-// Nomenclatura de variáveis
+// Boleanos
 
-const list = [
-  {
-    title: 'User',
-    followers: 5
-  },
-  {
-    title: 'Friendly',
-    followers: 50,
-  },
-  {
-    title: 'Famous',
-    followers: 500,
-  },
-  {
-    title: 'Super Star',
-    followers: 1000,
-  },
-]
-
-export default async function getData(req, res) {
-  const github = String(req.query.username)
-
-  if (!github) {
-    return res.status(400).json({
-      message: `Please provide an username to search on the github API`
-    })
-  }
-
-  const response = await fetch(`https://api.github.com/users/${github}`);
-
-  if (response.status === 404) {
-    return res.status(400).json({
-      message: `User with username "${github}" not found`
-    })
-  }
-
-  const data = await response.json()
-
-  const orderList = list.sort((a, b) =>  b.followers - a.followers); 
-
-  const category = orderList.find(i => data.followers > i.followers)
-
-  const result = {
-    github,
-    category: category.title
-  }
-
-  return result
+const userParke = {
+  name: 'Diego Fernandes',
+  height: 190,
+  hasTicket: true,
 }
 
-getData({ query: {
-  username: 'josepholiveira'
-}}, {})
+const UserNecessaryHeight = 130
+
+const parkwCurrentTime = new Date().getHours()
+
+const isParkOpen = parkwCurrentTime > 9 && parkwCurrentTime < 18
+
+if (!isParkOpen) {
+  throw new Error('O parque está fechado!')
+}
+
+const isThereTicket = userParke.hasTicket
+
+if (!isThereTicket) {
+  throw new Error('O Diego não possui um bilhete para entrar no parque!')
+}
+
+const enterTheToy = userParke.height > UserNecessaryHeight
+
+if (!enterTheToy) {
+  throw new Error('O Diego não pode entrar no brinquedo!')
+} 
+
+console.log('O Matheus se divertiu muito! :)')
